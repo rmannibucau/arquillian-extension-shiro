@@ -62,3 +62,5 @@ public class ShiroArquillianAPITest {
     }
 }
 ----
+
+NOTE: `LoggedWithSubject` can be put at class level
