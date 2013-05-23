@@ -26,17 +26,6 @@ Then decorate your test with `com.github.rmannibucau.arquillian.shiro.api.Logged
 
 Here are some examples:
 
-[source,java]
-----
-// imports
-
-@RunWith(Arquillian.class)
-public class ShiroArquillianAPITest {
-    @Deployment
-    public static Archive<?> war() {
-        return generateMyWar();
-    }
-
     @Test
     @LoggedWithSubject("arquillian")
     public void checkUserIsLogged() {
@@ -60,5 +49,3 @@ public class ShiroArquillianAPITest {
     public void checkCustomIni() {
         // logged with user jboss
     }
-}
-----
