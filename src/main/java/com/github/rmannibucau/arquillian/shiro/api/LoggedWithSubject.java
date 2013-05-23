@@ -8,7 +8,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Use a mock shiro.ini describe by the attributes and logged in the defined user automatically.
+ * Use a mock shiro.ini describe by the attributes and logs in the defined user automatically.
  */
 @Retention(RUNTIME)
 @Target({ METHOD, TYPE })
