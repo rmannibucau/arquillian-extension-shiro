@@ -34,7 +34,7 @@ Here are some examples:
         public static Archive<?> war() {
             return ShrinkWrap.create(WebArchive.class, "app.war");
         }
-
+    
         @Test
         @LoggedWithSubject("arquillian")
         public void checkUserIsLogged() {
