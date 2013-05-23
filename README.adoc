@@ -26,36 +26,39 @@ Then decorate your test with `com.github.rmannibucau.arquillian.shiro.api.Logged
 
 Here are some examples:
 
-    // imports
+[source,java]
+----
+// imports
 
-    @RunWith(Arquillian.class)
-    public class ShiroArquillianAPITest {
-        @Deployment
-        public static Archive<?> war() {
-            return ShrinkWrap.create(WebArchive.class, "app.war");
-        }
-    
-        @Test
-        @LoggedWithSubject("arquillian")
-        public void checkUserIsLogged() {
-            // logged as 'arquillian' with no role
-        }
-
-        @Test
-        @LoggedWithSubject(value = "arquillian", roles = "*")
-        public void checkUserHasRoles() {
-            // logged as 'arquillian' with all roles
-        }
-
-        @Test
-        @LoggedWithSubject(value = "foo", password = "bar", ini = "classpath:custom-shiro.ini")
-        public void checkOverridedCustomIni() {
-            // logged with user foo even if not in the specified ini file
-        }
-
-        @Test
-        @LoggedWithSubject(value = "jboss", password = "arquillian", ini = "classpath:custom-shiro.ini")
-        public void checkCustomIni() {
-            // logged with user jboss
-        }
+@RunWith(Arquillian.class)
+public class ShiroArquillianAPITest {
+    @Deployment
+    public static Archive<?> war() {
+        return generateMyWar();
     }
+
+    @Test
+    @LoggedWithSubject("arquillian")
+    public void checkUserIsLogged() {
+        // logged as 'arquillian' with no role
+    }
+
+    @Test
+    @LoggedWithSubject(value = "arquillian", roles = "*")
+    public void checkUserHasRoles() {
+        // logged as 'arquillian' with all roles
+    }
+
+    @Test
+    @LoggedWithSubject(value = "foo", password = "bar", ini = "classpath:custom-shiro.ini")
+    public void checkOverridedCustomIni() {
+        // logged with user foo even if not in the specified ini file
+    }
+
+    @Test
+    @LoggedWithSubject(value = "jboss", password = "arquillian", ini = "classpath:custom-shiro.ini")
+    public void checkCustomIni() {
+        // logged with user jboss
+    }
+}
+----
