@@ -31,9 +31,9 @@ public class ShiroConfiguration {
         final StringBuilder builder = new StringBuilder();
 
         if (ini != null) {
-            builder.append("ini = " + true);
+            builder.append("ini = true\n");
         }
-        builder.append("auto-configured = ").append(configured);
+        builder.append("auto-configured = ").append(configured).append('\n');
 
         return builder.toString();
     }
