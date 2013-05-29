@@ -6,9 +6,15 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.Realm;
+import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.LifecycleUtils;
 import org.apache.shiro.util.ThreadContext;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 // only used to ensure lazy loading of classes
 public final class Shiros {
@@ -157,8 +163,16 @@ public final class Shiros {
         }
 
         @Override
-        protected boolean shouldImplicitlyCreateRealm(final Ini ini) {
-            return false; // because we support custom realms
+        protected void applyRealmsToSecurityManager(final Collection<Realm> realms, final SecurityManager securityManager) {
+            if (realms.size() > 1) { // remove default one
+                final Iterator<Realm> r = realms.iterator();
+                while (r.hasNext()) {
+                    if (IniRealm.class.isInstance(r.next())) {
+                        r.remove();
+                    }
+                }
+            }
+            super.applyRealmsToSecurityManager(realms, securityManager);
         }
     }
 }
