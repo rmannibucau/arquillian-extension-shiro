@@ -50,7 +50,7 @@ public final class Shiros {
             updateIni(iniInstance, name, pwdToLogin, roles);
         }
 
-        ThreadContext.bind(new IniSecurityManagerFactory(iniInstance).getInstance());
+        ThreadContext.bind(new NoImplicitIniSecurityManagerFactory(iniInstance).getInstance());
 
         if (pwdToLogin != null) {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(name, pwdToLogin));
@@ -149,5 +149,16 @@ public final class Shiros {
 
     private Shiros() {
         // no-op
+    }
+
+    private static class NoImplicitIniSecurityManagerFactory extends IniSecurityManagerFactory {
+        public NoImplicitIniSecurityManagerFactory(final Ini iniInstance) {
+            super(iniInstance);
+        }
+
+        @Override
+        protected boolean shouldImplicitlyCreateRealm(final Ini ini) {
+            return false; // because we support custom realms
+        }
     }
 }
