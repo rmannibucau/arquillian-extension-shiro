@@ -123,6 +123,7 @@ public final class Shiros {
         ThreadContext.unbindSubject();
         ThreadContext.bind(oldSubject.get());
         ThreadContext.bind(oldSecurityManager.get());
+        ThreadContext.remove();
         oldSecurityManager.remove();
         oldSubject.remove();
     }
